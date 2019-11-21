@@ -10,8 +10,8 @@
 
 Contact = require('./contactModel');
 
-exports.index = function (req, res) {
-    Contact.get(function (err, contacts) {
+exports.index = (req, res) => {
+    Contact.get((err, contacts) => {
         if (err) {
             res.json({
                 status: "error",
@@ -27,7 +27,7 @@ exports.index = function (req, res) {
 };
 
 // Handle create contact actions
-exports.new = function (req, res) {
+exports.new = (req, res) => {
     var contact = new Contact();
     contact.name = req.body.name ? req.body.name : contact.name;
     contact.gender = req.body.gender;
@@ -35,7 +35,7 @@ exports.new = function (req, res) {
     contact.phone = req.body.phone;
 
 // save the contact and check for errors
-    contact.save(function (err) {
+    contact.save((err) => {
         // if (err)
         //     res.json(err);
 res.json({
@@ -46,7 +46,7 @@ res.json({
 };
 
 // Handle view contact info
-exports.view = function (req, res) {
+exports.view = (req, res) => {
     Contact.findById(req.params.contact_id, function (err, contact) {
         if (err)
             res.send(err);
@@ -58,7 +58,7 @@ exports.view = function (req, res) {
 };
 
 // Handle update contact info
-exports.update = function (req, res) {
+exports.update = (req, res) => {
 Contact.findById(req.params.contact_id, function (err, contact) {
         if (err)
             res.send(err);
@@ -68,7 +68,7 @@ contact.name = req.body.name ? req.body.name : contact.name;
         contact.phone = req.body.phone;
 
 // save the contact and check for errors
-        contact.save(function (err) {
+        contact.save((err) => {
             if (err)
                 res.json(err);
             res.json({
@@ -81,10 +81,10 @@ contact.name = req.body.name ? req.body.name : contact.name;
 
 
 // Handle delete contact
-exports.delete = function (req, res) {
+exports.delete = (req, res) => {
     Contact.remove({
         _id: req.params.contact_id
-    }, function (err, contact) {
+    }, (err, contact) => {
         if (err)
             res.send(err);
 res.json({

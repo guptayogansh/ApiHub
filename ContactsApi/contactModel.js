@@ -1,6 +1,7 @@
 //The CRUD operations of the api are handled by this file
 
 var mongoose = require('mongoose');
+
 // Setup schema
 var contactSchema = mongoose.Schema({
     name: {
@@ -18,6 +19,7 @@ var contactSchema = mongoose.Schema({
         default: Date.now
     }
 });
+
 // Export Contact model
 var Contact = module.exports = mongoose.model('contact', contactSchema);
 module.exports.get = function (callback, limit) {
