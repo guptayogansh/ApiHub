@@ -1,25 +1,28 @@
-let express = require("express")
-let bodyParser = require("body-parser")
-let mongoose = require("mongoose")
-let apiRoutes = require("./api-routes")
+let express = require('express');
+let bodyParser = require('body-parser');
+let mongoose = require('mongoose');
+let app = express();
 
-let app = express()
-//configuring body parser to handle post requests
+let apiRoutes = require("./api-routes");
+
+// Configure bodyparser to handle post requests
 app.use(bodyParser.urlencoded({
     extended: true
- }));
+}));
 app.use(bodyParser.json());
 
-//connect to mongoose
-let db = mongoose.connection;
+mongoose.connect('mongodb://localhost/Apihub', { useNewUrlParser: true});
+
+var db = mongoose.connection;
 if(!db)
     console.log("Error connecting db")
 else
     console.log("Db connected successfully")
 
-let port = process.env.port || 8081
-app.use('/api', apiRoutes)
-app.get('/', (req,res) => res.send("Hey! I am the Server for ApiHub and I\'m built using Express!! Just installed nodemon for ease!"))
-app.listen(port, ()=>{
-    console.log("Running ApiHub on port: " + port)
-})
+var port = process.env.PORT || 8081;
+app.get('/', (req, res) => res.send('Hey! I am creating the server for my project using Express!! Just installed nodemon for ease!!'));
+app.use('/api', apiRoutes);
+app.listen(port, () => {
+    console.log("Running RestHub on port " + port);
+});
+
