@@ -11,13 +11,15 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost/Apihub', { useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/mine', { useNewUrlParser: true});
 
 var db = mongoose.connection;
 if(!db)
     console.log("Error connecting db")
-else
+else 
     console.log("Db connected successfully")
+     
+      
 
 var port = process.env.PORT || 8081;
 app.get('/', (req, res) => res.send('Hey! I am creating the server for my project using Express!! Just installed nodemon for ease!!'));
